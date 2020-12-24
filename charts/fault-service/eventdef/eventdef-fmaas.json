@@ -1,0 +1,49 @@
+{
+    "events": {
+        "FmaasConfigUpdateAttempted": {
+            "eventType": "CONFIG_UPDATE",
+            "perceivedSeverity": "INFO",
+            "probableCause": "FMaas Config Update Started",
+            "specificProblem": "FMaas Config Update Started",
+            "rootCauseIndicator": "",
+            "trendIndication": "",
+            "correlatedNotifications": "",
+            "additionalText": "",
+            "proposedRepairAction": "",
+            "serviceTypeAffected": "NONE",
+            "alarmHierarchy": "Independent",
+            "classification": "Notification",
+            "alarmType": ""
+        },
+        "FmaasConfigUpdateSuccess": {
+            "eventType": "CONFIG_UPDATE",
+            "perceivedSeverity": "INFO",
+            "probableCause": "FMaas Config Update completed Successfully",
+            "specificProblem": "FMaas Config Update completed Successfully",
+            "rootCauseIndicator": "",
+            "trendIndication": "",
+            "correlatedNotifications": "",
+            "additionalText": "",
+            "proposedRepairAction": "",
+            "serviceTypeAffected": "NONE",
+            "alarmHierarchy": "Independent",
+            "classification": "Notification",
+            "alarmType": ""
+        },
+        "FmaasConfigUpdateFailure": {
+            "eventType": "CONFIG_UPDATE",
+            "perceivedSeverity": "MAJOR",
+            "probableCause": "FMaas Config Update FAILED",
+            "specificProblem": "Problem with applying new properties",
+            "rootCauseIndicator": "",
+            "trendIndication": "",
+            "correlatedNotifications": "",
+            "additionalText": "",
+            "proposedRepairAction": "Check if correct JSON is recieved or if etcd connection is intact",
+            "serviceTypeAffected": "NONE",
+            "alarmHierarchy": "Independent",
+            "classification": "Normal",
+            "alarmType": "Process error alarm"
+        }
+    }
+}

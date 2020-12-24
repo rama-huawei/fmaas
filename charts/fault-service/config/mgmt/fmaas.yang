@@ -1,0 +1,37 @@
+module xcf-fmaas-config {
+	namespace "urn:rdns:org:xgvela:fmaas";
+
+	prefix xgvela-fmaas;
+
+	import ietf-inet-types { prefix inet; }
+
+        import tailf-common { prefix tailf; }
+
+	revision "2019-02-19" {
+		description "Initial revision";
+	}
+	container config {
+		tailf:callpoint configUpdate {
+			tailf:transaction-hook subtree;
+		}
+		leaf logLevel {
+			type enumeration {
+				enum TRACE;
+				enum FATAL;
+				enum ERROR;
+				enum WARN;
+				enum INFO;
+				enum DEBUG;
+				enum ALL;
+			}
+			mandatory true;
+		}
+		leaf dataRetentionPeriod {
+			type int32 {
+				range "1 .. 30";
+			}
+			mandatory true;
+			description "Data retention period in days";
+		}
+	}
+}

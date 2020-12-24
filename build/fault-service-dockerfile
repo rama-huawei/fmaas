@@ -1,0 +1,28 @@
+# our base build image
+FROM fault-service-builder:v0.1 as builder
+
+ARG BUILDER_LABEL
+
+RUN echo "Tagging Label IMAGE-TYPE=$BUILDER_LABEL"
+LABEL IMAGE-TYPE="$BUILDER_LABEL"
+
+# our main base image
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+RUN apk add --no-cache --upgrade bash
+
+# install netcat
+#RUN apt-get update && apt-get install netcat -y
+
+# create bin directory
+RUN mkdir -p /opt/fault-service
+
+# copy over the built artifact from the maven image
+COPY --from=builder target/FaultService-v0.1.jar /opt/fault-service
+COPY --from=builder target/conf /opt/fault-service/conf
+
+# add container start script
+ADD ./scripts/start.sh /bin/start.sh
+
+# set the startup command to run container
+ENTRYPOINT ["/bin/start.sh"]

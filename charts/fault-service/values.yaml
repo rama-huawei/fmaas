@@ -1,0 +1,135 @@
+# Copyright 2020 Mavenir
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+######## CNF TEMPLATE DEFINITIONS ###########
+nf:
+  version: "fmaas_tag"
+  vendorId: "mvnr"
+  xgvelaId: "xgvela1" #do not edit
+  nfClass: "mgmt"
+  nfType: "xgvela"
+  nfId: "xgvela1"
+  cnftpl_configmap:
+    mgmt_cfg:
+      create: true
+      metaspec:
+        annotations:
+          configMgmt: enabled
+    static_cfg:
+      create: true
+      metaspec: {}
+    env_cfg:
+      create: false
+      metaspec: {}
+  cnftpl_secret:
+      create: false
+      metaspec: {}
+      secretspec: {}
+  cnftpl_namespaces:
+      create: false
+      metaspec: {}
+  cnftpl_dashboard:
+      create: true
+      metaspec: {}
+  cnftpl_eventdef:
+      create: true
+      metaspec: {}
+  cnftpl_alertsdef:
+      create: false
+      metaspec: {}
+  cnftpl_metricsdef:
+      create: false
+      metaspec: {}
+
+###########################################
+paas_ns: "xgvela-paas"
+caas_ns: "kube-system"
+es:
+  host: "elasticsearch.xgvela-paas.svc.cluster.local"
+  port: "9200"
+  scheme: "http"
+  version: "6.4.3"
+kafka_svc_fqdn: "kafka-svc.xgvela-xgvela1-infra-xgvela-xgvela1.svc.cluster.local:9092"
+etcd_svc_fqdn: "etcd.xgvela-xgvela1-infra-xgvela-xgvela1.svc.cluster.local:2379"
+k8s_svc_fqdn: "kubernetes.default.svc.cluster.local"
+retry_count: "3"
+zk_svc_fqdn: "zk-0.zk.xgvela-xgvela1-infra-xgvela-xgvela1.svc.cluster.local:2181,zk-1.zk.xgvela-xgvela1-infra-xgvela-xgvela1.svc.cluster.local:2181,zk-2.zk.xgvela-xgvela1-infra-xgvela-xgvela1.svc.cluster.local:2181"
+storage_engine: "elasticsearch"
+
+common:
+  app_name: fault-service
+
+componentSpec:
+  deployment:
+    metaspec:
+      ext_name: v1
+    pod_metaspec:
+      labels:
+        app: fault-service
+      annotations:
+        sidecar.istio.io/inject: "false"
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+  service:
+    metaspec:
+      labels:
+        app: fault-service
+
+scaling:
+  max_replicas: 2
+  min_replicas: 1
+  target_cpu_percentage: 70
+
+serviceAccount: fault-serviceaccount
+replica_count: 1
+hub: 10.1.1.1:5000
+fault_service:
+  init_container:
+    image:
+      repository: xgvela-svc-init
+      tag: v0.3.4
+  container:
+    hostname: fault-service
+    image:
+      repository: fault-service
+      tag: fmaas_tag #replaced by build script
+    resource:
+      limit_memory: 1000Mi
+      limit_cpu: 500m
+      request_memory: 400Mi
+      request_cpu: 250m
+
+
+    mount:
+      type: Directory
+      container_path: /confd/apps
+      host_path: /data
+
+oam_sidecar:
+  container:
+    hostname: oam-sidecar
+    image:
+      repository: cim
+      tag: v1.11
+    resource:
+      limit_memory: 500Mi
+      limit_cpu: 100m
+      request_memory: 120Mi
+      request_cpu: 60m
+    ports:
+      server: 4222
+    mount:
+      type: Directory
+      container_path: /opt/logs
+      host_path: /data/logs

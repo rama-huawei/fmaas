@@ -1,0 +1,521 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 19,
+  "links": [],
+  "panels": [
+    {
+      "columns": [
+        {
+          "text": "commonEventHeader.eventName",
+          "value": "commonEventHeader.eventName"
+        },
+        {
+          "text": "eventDefinition.severityCode",
+          "value": "eventDefinition.severityCode"
+        },
+        {
+          "text": "commonEventHeader.startEpochMillis",
+          "value": "commonEventHeader.startEpochMillis"
+        },
+        {
+          "text": "eventDefinition.probableCause",
+          "value": "eventDefinition.probableCause"
+        },
+        {
+          "text": "sourceHeaders.managedObject",
+          "value": "sourceHeaders.managedObject"
+        },
+        {
+          "text": "commonEventHeader.sourceId",
+          "value": "commonEventHeader.sourceId"
+        },
+        {
+          "text": "eventDefinition.additionalText",
+          "value": "eventDefinition.additionalText"
+        }
+      ],
+      "datasource": "ES_Alarms",
+      "fontSize": "80%",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {},
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 2,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "EventTime",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "commonEventHeader.startEpochMillis",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
+        },
+        {
+          "alias": "EventName",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "commonEventHeader.eventName",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "EventSeverity",
+          "colorMode": "row",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "#37872D"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 2,
+          "pattern": "eventDefinition.severityCode",
+          "rangeMaps": [
+            {
+              "from": "1",
+              "text": "CRITICAl",
+              "to": "1"
+            },
+            {
+              "from": "2",
+              "text": "MAJOR",
+              "to": "2"
+            },
+            {
+              "from": "3",
+              "text": "MINOR",
+              "to": "3"
+            },
+            {
+              "from": "4",
+              "text": "WARNING",
+              "to": "4"
+            },
+            {
+              "from": "5",
+              "text": "INFO",
+              "to": "5"
+            }
+          ],
+          "thresholds": [
+            "2",
+            "5"
+          ],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "ProbableCause",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "eventDefinition.probableCause",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "AdditionalText",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "eventDefinition.additionalText",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "ManagedObject",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "sourceHeaders.managedObject",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "AdditionalInfo",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "eventDefinition.additionalInfo",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "SourceId",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "commonEventHeader.sourceId",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {
+                "size": 500
+              },
+              "type": "raw_document"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "commonEventHeader.startEpochMillis"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active Alarms",
+      "transform": "json",
+      "type": "table"
+    },
+    {
+      "columns": [
+        {
+          "text": "commonEventHeader.eventName",
+          "value": "commonEventHeader.eventName"
+        },
+        {
+          "text": "eventDefinition.severityCode",
+          "value": "eventDefinition.severityCode"
+        },
+        {
+          "text": "commonEventHeader.startEpochMillis",
+          "value": "commonEventHeader.startEpochMillis"
+        },
+        {
+          "text": "eventDefinition.probableCause",
+          "value": "eventDefinition.probableCause"
+        },
+        {
+          "text": "sourceHeaders.managedObject",
+          "value": "sourceHeaders.managedObject"
+        },
+        {
+          "text": "commonEventHeader.sourceId",
+          "value": "commonEventHeader.sourceId"
+        },
+        {
+          "text": "eventDefinition.additionalText",
+          "value": "eventDefinition.additionalText"
+        }
+      ],
+      "datasource": "ES_Events",
+      "fontSize": "80%",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 3,
+      "options": {},
+      "pageSize": 5,
+      "showHeader": true,
+      "sort": {
+        "col": null,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "EventTime",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "commonEventHeader.startEpochMillis",
+          "thresholds": [],
+          "type": "date",
+          "unit": "short"
+        },
+        {
+          "alias": "EventName",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "commonEventHeader.eventName",
+          "sanitize": false,
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "EventSeverity",
+          "colorMode": "row",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "#37872D"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": null,
+          "link": false,
+          "mappingType": 2,
+          "pattern": "eventDefinition.severityCode",
+          "rangeMaps": [
+            {
+              "from": "1",
+              "text": "CRITICAl",
+              "to": "1"
+            },
+            {
+              "from": "2",
+              "text": "MAJOR",
+              "to": "2"
+            },
+            {
+              "from": "3",
+              "text": "MINOR",
+              "to": "3"
+            },
+            {
+              "from": "4",
+              "text": "WARNING",
+              "to": "4"
+            },
+            {
+              "from": "5",
+              "text": "INFO",
+              "to": "5"
+            },
+            {
+              "from": "6",
+              "text": "CLEAR",
+              "to": "6"
+            }
+          ],
+          "thresholds": [
+            "2",
+            "5"
+          ],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "PodId",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "sourceHeaders.podId",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "ManagedObject",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "sourceHeaders.managedObject",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "AdditionalInfo",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "eventDefinition.additionalText",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "SourceId",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "commonEventHeader.sourceId",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "ProbableCause",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "eventDefinition.probableCause",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "field": "select field",
+              "id": "1",
+              "meta": {},
+              "settings": {
+                "size": 500
+              },
+              "type": "raw_document"
+            }
+          ],
+          "refId": "A",
+          "timeField": "commonEventHeader.startEpochMillis"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Events List",
+      "transform": "json",
+      "type": "table"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 20,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "XGVela_FMaaS",
+  "uid": "vlgy",
+  "version": 2
+}
