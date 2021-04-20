@@ -12,8 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- $cnfHdr := (dict "" "") -}}
+{{- include "cnfTplHeader_2_9" (dict "cnfHdr" $cnfHdr "dot" . ) -}}
 apiVersion: v1
-appVersion: "1.1"
-description: A Helm chart for Kubernetes
-name: fault-service
-version: "1.4.2"
+kind: Service
+{{- include "cnfTplMetadata_2_9" (dict "setOffset" "0" "cnfHdr" $cnfHdr "metadata" .Values.componentSpec.service.metaspec) }}
+spec:
+ selector:
+   app: fmaas
+ ports:
+ - name: rest
+   port: 12090
+   targetPort: 8080
+   nodePort: 32666
+ type: NodePort

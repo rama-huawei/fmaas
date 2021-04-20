@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # our base build image
-FROM fault-service-builder:v0.1 as builder
+FROM fmaas-builder:v0.1 as builder
 
 ARG BUILDER_LABEL
 
@@ -29,11 +29,11 @@ RUN apk add --no-cache --upgrade bash
 #RUN apt-get update && apt-get install netcat -y
 
 # create bin directory
-RUN mkdir -p /opt/fault-service
+RUN mkdir -p /opt/fmaas
 
 # copy over the built artifact from the maven image
-COPY --from=builder target/FaultService-v0.1.jar /opt/fault-service
-COPY --from=builder target/conf /opt/fault-service/conf
+COPY --from=builder target/fmaas-v0.1.jar /opt/fmaas
+COPY --from=builder target/conf /opt/fmaas/conf
 
 # add container start script
 ADD ./scripts/start.sh /bin/start.sh

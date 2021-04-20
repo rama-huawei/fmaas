@@ -32,7 +32,7 @@ echo "CID $K8S_CONTAINER_ID"
 
 echo "$JAVA_OPTIONS"
 echo "======== Starting FaultService ========"
-java -XX:+PrintFlagsFinal $JAVA_OPTIONS -jar /opt/fault-service/FaultService-v0.1.jar
+java -XX:+PrintFlagsFinal $JAVA_OPTIONS -jar /opt/fmaas/fmaas-v0.1.jar
 
 echo "======== Exiting container ======="
 

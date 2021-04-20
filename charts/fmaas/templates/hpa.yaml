@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- if .Values.global.xgvela.enablexgvelaScaling -}}
 {{- $cnfHdr := (dict "" "") -}}
 {{- include "cnfTplHeader_2_9" (dict "cnfHdr" $cnfHdr "dot" . ) -}}
-apiVersion: v1
-kind: Service
-{{- include "cnfTplMetadata_2_9" (dict "setOffset" "0" "cnfHdr" $cnfHdr "metadata" .Values.componentSpec.service.metaspec) }}
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+{{- include "cnfTplMetadata_2_9" (dict "setOffset" "0" "cnfHdr" $cnfHdr "metadata" .Values.componentSpec.deployment.pod_metaspec) }}
 spec:
- selector:
-   app: fault-service
- ports:
- - name: rest
-   port: 12090
-   targetPort: 8080
-   nodePort: 32666
- type: NodePort
+  maxReplicas: {{ .Values.scaling.max_replicas }}
+  minReplicas: {{ .Values.scaling.min_replicas }}
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: fmaas
+  targetCPUUtilizationPercentage: {{ .Values.scaling.target_cpu_percentage }}
+{{- end -}}
+

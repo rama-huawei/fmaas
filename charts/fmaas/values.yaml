@@ -68,7 +68,7 @@ zk_svc_fqdn: "zk-0.zk.xgvela-xgvela1-infra-xgvela-xgvela1.svc.cluster.local:2181
 storage_engine: "elasticsearch"
 
 common:
-  app_name: fault-service
+  app_name: fmaas
 
 componentSpec:
   deployment:
@@ -76,7 +76,7 @@ componentSpec:
       ext_name: v1
     pod_metaspec:
       labels:
-        app: fault-service
+        app: fmaas
       annotations:
         sidecar.istio.io/inject: "false"
         prometheus.io/scrape: "true"
@@ -84,14 +84,14 @@ componentSpec:
   service:
     metaspec:
       labels:
-        app: fault-service
+        app: fmaas
 
 scaling:
   max_replicas: 2
   min_replicas: 1
   target_cpu_percentage: 70
 
-serviceAccount: fault-serviceaccount
+serviceAccount: fmaasaccount
 replica_count: 1
 hub: 10.1.1.1:5000
 fault_service:
@@ -100,9 +100,9 @@ fault_service:
       repository: xgvela-svc-init
       tag: v0.3.4
   container:
-    hostname: fault-service
+    hostname: fmaas
     image:
-      repository: fault-service
+      repository: fmaas
       tag: fmaas_tag #replaced by build script
     resource:
       limit_memory: 1000Mi
