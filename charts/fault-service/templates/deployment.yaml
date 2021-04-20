@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- $cnfHdr := (dict "" "") -}} 
+{{- $cnfHdr := (dict "" "") -}}
 {{- include "cnfTplHeader_2_9" (dict "cnfHdr" $cnfHdr "dot" . ) -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -22,7 +22,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.common.app_name }}
-  template: 
+  template:
     {{- include "cnfTplMetadata_2_9" (dict "setOffset" "4" "cnfHdr" $cnfHdr "metadata" .Values.componentSpec.deployment.pod_metaspec) }}
     spec:
       {{- if and (.Values.global) (.Values.global.xgvela) (.Values.global.xgvela.mgmtNodeSelector) (.Values.global.xgvela.mgmtNodeSelector.enabled) }}
@@ -45,7 +45,7 @@ spec:
            value: {{ .Values.global.xgvela.kafka_svc_fqdn | default .Values.kafka_svc_fqdn | quote }}
         command: [ "/bin/bash", "-c", "svc-discovery.sh \"EVENT FMAASEVENTS\" " ]
       containers:
-      - name: fault-service
+      - name: fmaas
         {{- if and (.Values.global) (.Values.global.hub) }}
         image: {{ .Values.global.hub }}/{{ .Values.fault_service.container.image.repository }}:{{ .Values.fault_service.container.image.tag }}
         {{- else }}
@@ -89,7 +89,7 @@ spec:
          - name: ES_SCHEME
            value: {{ .Values.es.scheme | quote }}
          - name: ES_VERSION
-           value: {{ .Values.es.version | quote }}  
+           value: {{ .Values.es.version | quote }}
          - name: KAFKA_SVC_FQDN
            value: {{ .Values.global.xgvela.kafka_svc_fqdn | default .Values.kafka_svc_fqdn | quote }}
          - name: K8S_SVC_FQDN
@@ -99,10 +99,10 @@ spec:
          - name: JAVA_OPTIONS
            value: ""
          - name: ZK_FQDN
-           value: {{ .Values.global.xgvela.zk_svc_fqdn | default .Values.zk_svc_fqdn | quote }}  
+           value: {{ .Values.global.xgvela.zk_svc_fqdn | default .Values.zk_svc_fqdn | quote }}
          - name: STORAGE_ENGINE
            value: {{ .Values.global.xgvela.storage_engine | default .Values.storage_engine | quote }}
-           
+
         command: ["/bin/bash","-c","/bin/start.sh"]
         resources:
           limits:
@@ -113,7 +113,7 @@ spec:
             memory: {{ .Values.fault_service.container.resource.request_memory }}
         volumeMounts:
         - mountPath: /fmaasconfig
-          name: fault-service-mgmt-cfg
+          name: fmaas-mgmt-cfg
       - name: cim
         {{- if and (.Values.global) (.Values.global.hub) }}
         image: {{ .Values.global.hub }}/{{ .Values.oam_sidecar.container.image.repository }}:{{ .Values.oam_sidecar.container.image.tag }}
@@ -160,8 +160,8 @@ spec:
         - mountPath: /opt/conf/
           name: cim-config
         - mountPath: /opt/conf/static/
-          name: static-config  
-      volumes:      
+          name: static-config
+      volumes:
       - name: mnt-oam-sidecar
         hostPath:
           path: {{ .Values.oam_sidecar.container.mount.host_path }}
@@ -169,9 +169,9 @@ spec:
       - configMap:
           items:
             - key: fmaas.json
-              path: fmaas.json     
+              path: fmaas.json
           name: {{ $cnfHdr.nfVariables.svcname }}-mgmt-cfg
-        name: fault-service-mgmt-cfg
+        name: fmaas-mgmt-cfg
       - configMap:
           items:
             - key: cim.json
@@ -183,4 +183,4 @@ spec:
             - key: common-infra.json
               path: common-infra.json
           name: {{ $cnfHdr.nfVariables.svcname }}-static-cfg
-        name: static-config  
+        name: static-config

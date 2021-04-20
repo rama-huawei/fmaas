@@ -24,7 +24,7 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: fault-service
+    name: fmaas
   targetCPUUtilizationPercentage: {{ .Values.scaling.target_cpu_percentage }}
 {{- end -}}
 

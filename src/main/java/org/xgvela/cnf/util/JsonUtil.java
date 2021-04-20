@@ -103,7 +103,7 @@ public class JsonUtil {
 	K8sUtil k8sUtil;
 	public static int globalSequence;
 	private static final String DEFAULT = "default";
-	public static String reportingEntityName = "fault-service";
+	public static String reportingEntityName = "fmaas";
 	public static String reportingEntityId = String.valueOf(System.getenv("K8S_POD_ID"));
 	public static String meId = Constants.EMPTY_STRING;
 	public static String meDn = Constants.EMPTY_STRING;

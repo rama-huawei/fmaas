@@ -325,9 +325,9 @@ public class ScheduledIndexCreation {
 		if (mapping.isEmpty()) {
 			try {
 				if (esClient.isLessThanSixPointEight())
-					mapping = new String(Files.readAllBytes(Paths.get("/opt/fault-service/conf/mapping.json")));
+					mapping = new String(Files.readAllBytes(Paths.get("/opt/fmaas/conf/mapping.json")));
 				else
-					mapping = new String(Files.readAllBytes(Paths.get("/opt/fault-service/conf/mapping_es_gt68.json")));
+					mapping = new String(Files.readAllBytes(Paths.get("/opt/fmaas/conf/mapping_es_gt68.json")));
 			} catch (IOException e) {
 				LOG.error(e.getMessage());
 			}
