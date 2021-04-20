@@ -210,9 +210,9 @@ public class UpdateConfigHelper {
 				cimEventdefCmapNamespace = "xgvela-xgvela1-mgmt-xgvela-xgvela1";
 			if (System.getenv(Constants.MGMT_VERSION) != null)
 				svcVersion = System.getenv(Constants.MGMT_VERSION);
-			String vesGwSvc = jsonUtil.getServiceName("ves-gateway");
+			String vesGwSvc = jsonUtil.getServiceName("vesgw");
 			if (vesGwSvc.isEmpty())
-				vesGwSvc = "ves-gateway";
+				vesGwSvc = "vesgw";
 			cimEventdefCmapName = "xgvela-mgmt" + "-" + svcVersion + Constants.EVT_CMAP_SUFFIX;
 			JsonUtil.cimEventdefCmapData = k8sUtil.getCmap(cimEventdefCmapNamespace, cimEventdefCmapName);
 			if (JsonUtil.cimEventdefCmapData == null) {
