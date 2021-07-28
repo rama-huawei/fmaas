@@ -32,7 +32,7 @@ RUN apk add --no-cache --upgrade bash
 RUN mkdir -p /opt/fmaas
 
 # copy over the built artifact from the maven image
-COPY --from=builder target/fmaas-v0.1.jar /opt/fmaas
+COPY --from=builder target/FaultService-v0.1.jar /opt/fmaas
 COPY --from=builder target/conf /opt/fmaas/conf
 
 # add container start script
